@@ -3,6 +3,7 @@
 		"target": "esNext",
 		"watch": true,
 		// "outDir": "./dist",
+		"types": ["express"],
 		"lib": ["DOM", "es2017"]
 	}
 }

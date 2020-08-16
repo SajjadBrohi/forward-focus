@@ -1,5 +1,3 @@
-const HDS = document.querySelector('h1');
-
 const express = require('express');
 const app = express();
 
