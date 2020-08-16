@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
 
+console.log('hi');
+
+console.log('hello');
+
 app.get('/', (req, res): void => {
-	res.sendFIle(__dirname + 'index.html');
+	res.sendFile(__dirname + 'index.html');
 });
 
 app.listen(3000, (): void => {
