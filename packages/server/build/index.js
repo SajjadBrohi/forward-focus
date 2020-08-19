@@ -11,10 +11,13 @@ const articleSchema = new mongoose.Schema({
     content: String,
 });
 const Article = mongoose.model('Article', articleSchema);
+/////////////////////////////////////////// Requests Targetting All Articles ///////////////////////////////////////////
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
-app.get('/articles', (req, res) => {
+app
+    .route('/articles')
+    .get((req, res) => {
     Article.find({}, (err, foundArticles) => {
         if (err) {
             res.send(err);
@@ -23,8 +26,8 @@ app.get('/articles', (req, res) => {
             res.send(foundArticles);
         }
     });
-});
-app.post('/articles', (req, res) => {
+})
+    .post((req, res) => {
     const article = new Article({
         title: req.body.title,
         content: req.body.content,
@@ -37,14 +40,25 @@ app.post('/articles', (req, res) => {
             res.send('Successfully added a new article!');
         }
     });
-});
-app.delete('/articles', (req, res) => {
+})
+    .delete((req, res) => {
     Article.deleteMany({}, (err) => {
         if (err) {
-            console.log(err);
+            res.send(err);
         }
         else {
-            console.log('Successfully deleted!');
+            res.send('Successfully deleted!');
+        }
+    });
+});
+/////////////////////////////////////////// Requests Targetting a Specific Article ///////////////////////////////////////////
+app.route('/articles/:articleTitle').get((req, res) => {
+    Article.findOne({ title: req.params.articleTitle }, (err, response) => {
+        if (response) {
+            res.send(response);
+        }
+        else {
+            res.send('No articles found.');
         }
     });
 });
