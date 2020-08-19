@@ -20,24 +20,42 @@ app.get('/', (req, res): void => {
 	res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/articles', (req, res): void => {
-	Article.find({}, (err, foundArticles) => {
-		if (err) {
-			res.send(err);
-		} else {
-			res.send(foundArticles);
-		}
-	});
-});
+app
+	.route('/articles')
+	.get((req, res): void => {
+		Article.find({}, (err, foundArticles) => {
+			if (err) {
+				res.send(err);
+			} else {
+				res.send(foundArticles);
+			}
+		});
+	})
 
-app.post('/articles', (req, res): void => {
-	const article = new Article({
-		title: req.body.title,
-		content: req.body.content,
-	});
+	.post((req, res): void => {
+		const article = new Article({
+			title: req.body.title,
+			content: req.body.content,
+		});
 
-	article.save();
-});
+		article.save((err) => {
+			if (err) {
+				res.send(err);
+			} else {
+				res.send('Successfully added a new article!');
+			}
+		});
+	})
+
+	.delete((req, res) => {
+		Article.deleteMany({}, (err) => {
+			if (err) {
+				res.send(err);
+			} else {
+				res.send('Successfully deleted!');
+			}
+		});
+	});
 
 app.listen(3000, (): void => {
 	console.log('Server started at port 3000.');
