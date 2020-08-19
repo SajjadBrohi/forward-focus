@@ -73,6 +73,16 @@ app
             res.send('Successfully updated!');
         }
     });
+})
+    .patch((req, res) => {
+    Article.findOneAndUpdate({ title: req.params.articleTitle }, { $set: req.body }, (err, response) => {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            res.send('Successfully updated!');
+        }
+    });
 });
 app.listen(3000, () => {
     console.log('Server started at port 3000.');

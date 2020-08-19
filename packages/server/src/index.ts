@@ -76,7 +76,7 @@ app
 	.put((req, res) => {
 		Article.findOneAndUpdate(
 			{ title: req.params.articleTitle },
-			{ $set: req.body.title, content: req.body.content },
+			{ title: req.body.title, content: req.body.content },
 			(err, response) => {
 				if (err) {
 					res.send(err);
@@ -86,6 +86,7 @@ app
 			},
 		);
 	})
+
 	.patch((req, res) => {
 		Article.findOneAndUpdate(
 			{ title: req.params.articleTitle },
