@@ -18,10 +18,6 @@ const Article = mongoose.model('Article', articleSchema);
 
 /////////////////////////////////////////// Requests Targetting All Articles ///////////////////////////////////////////
 
-app.get('/', (req, res): void => {
-	res.sendFile(__dirname + '/index.html');
-});
-
 app
 	.route('/articles')
 	.get((req, res): void => {
@@ -96,6 +92,19 @@ app
 					res.send(err);
 				} else {
 					res.send('Successfully updated!');
+				}
+			},
+		);
+	})
+
+	.delete((req, res) => {
+		Article.findOneAndDelete(
+			{ title: req.params.articleTitle },
+			(err, response) => {
+				if (err) {
+					res.send(err);
+				} else {
+					res.send('Successfully deleted!');
 				}
 			},
 		);
