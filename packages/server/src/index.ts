@@ -14,13 +14,6 @@ const articleSchema = new mongoose.Schema({
 
 const Article = mongoose.model('Article', articleSchema);
 
-const mango = new Article({
-	title: 'Mango goes sour',
-	content: 'It is true that Mangoes go sour.',
-});
-
-mango.save();
-
 app.get('/', (req, res): void => {
 	res.sendFile(__dirname + '/index.html');
 });

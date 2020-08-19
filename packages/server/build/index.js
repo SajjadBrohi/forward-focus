@@ -2,23 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 
-// mongoose
-// 	.connect('mongodb://localhost/wikiDB', {
-// 		useUnifiedTopology: true,
-// 		useNewUrlParser: true,
-// 		useCreateIndex: true,
-// 	})
-// 	.then(() => {
-// 		console.log('Connected To Mongo Db DataBase');
-// 	})
-// 	.catch((err) => {
-// 		console.log('DataBase Connection Error ' + err);
-// 	});
-
-mongoose.connect('mongodb://localhost:27017/wikiDB', {
+mongoose.connect('mongodb://localhost/wikiDB', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
+
 const articleSchema = new mongoose.Schema({
 	title: String,
 	content: String,
