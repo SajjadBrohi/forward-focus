@@ -36,7 +36,7 @@ app
 			content: req.body.content,
 		});
 
-		article.save((err) => {
+		article.save((err): void => {
 			if (err) {
 				res.send(err);
 			} else {
@@ -46,7 +46,7 @@ app
 	})
 
 	.delete((req, res) => {
-		Article.deleteMany({}, (err) => {
+		Article.deleteMany({}, (err): void => {
 			if (err) {
 				res.send(err);
 			} else {
@@ -59,17 +59,17 @@ app
 
 app
 	.route('/articles/:articleTitle')
-	.get((req, res) => {
+	.get((req, res): void => {
 		Article.findOne({ title: req.params.articleTitle }, (err, response) => {
 			if (response) {
 				res.send(response);
 			} else {
-				res.send('No articles found.');
+				res.send('No article found.');
 			}
 		});
 	})
 
-	.put((req, res) => {
+	.put((req, res): void => {
 		Article.findOneAndUpdate(
 			{ title: req.params.articleTitle },
 			{ title: req.body.title, content: req.body.content },
@@ -83,7 +83,7 @@ app
 		);
 	})
 
-	.patch((req, res) => {
+	.patch((req, res): void => {
 		Article.findOneAndUpdate(
 			{ title: req.params.articleTitle },
 			{ $set: req.body },
@@ -97,7 +97,7 @@ app
 		);
 	})
 
-	.delete((req, res) => {
+	.delete((req, res): void => {
 		Article.findOneAndDelete(
 			{ title: req.params.articleTitle },
 			(err, response) => {
