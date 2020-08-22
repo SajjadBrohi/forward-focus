@@ -40,13 +40,13 @@ function CreateArea(props: Props) {
 				<input
 					onChange={updatePost}
 					name="title"
-					placeholder="Title"
+					placeholder="Question Summary"
 					value={post.title}
 				/>
 				<textarea
 					onChange={updatePost}
 					name="content"
-					placeholder="Take a note..."
+					placeholder="Details"
 					rows={3}
 					value={post.content}
 				/>

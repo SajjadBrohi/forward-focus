@@ -4,6 +4,7 @@ interface Props {
 	id: number;
 	title: string;
 	content: string;
+	deleteFunction: any;
 }
 
 function Note(props: Props) {
@@ -11,6 +12,13 @@ function Note(props: Props) {
 		<div className="note">
 			<h1>{props.title}</h1>
 			<p>{props.content}</p>
+			<button
+				onClick={() => {
+					props.deleteFunction(props.id);
+				}}
+			>
+				DELETE
+			</button>
 		</div>
 	);
 }

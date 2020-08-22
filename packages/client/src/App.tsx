@@ -25,11 +25,22 @@ function App() {
 		});
 	}
 
+	function deletePost(id: number) {
+		setNotes((prevValue: any) => {
+			return prevValue.filter((post: any, index: number) => index !== id);
+		});
+	}
+
 	return (
 		<div>
 			<Header /> <CreateArea postFunction={newPost} /> <Footer />
-			{notes.map((note) => (
-				<Note id={note.key} title={note.title} content={note.content} />
+			{notes.map((note, index) => (
+				<Note
+					id={index}
+					title={note.title}
+					content={note.content}
+					deleteFunction={deletePost}
+				/>
 			))}
 		</div>
 	);

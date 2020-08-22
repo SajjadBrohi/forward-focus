@@ -12,7 +12,7 @@ body {
 }
 
 header {
-	background-color: #f5ba13;
+	background-color: rgb(146, 41, 138);
 	margin: auto -16px;
 	padding: 16px 32px;
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
@@ -59,7 +59,7 @@ footer p {
 	position: relative;
 	float: right;
 	margin-right: 10px;
-	color: #f5ba13;
+	color: rgb(146, 41, 138);
 	border: none;
 	width: 36px;
 	height: 36px;
@@ -90,7 +90,7 @@ form button {
 	position: absolute;
 	right: 18px;
 	bottom: -18px;
-	background: #f5ba13;
+	background: rgb(146, 41, 138);
 	color: #fff;
 	border: none;
 	border-radius: 50%;
