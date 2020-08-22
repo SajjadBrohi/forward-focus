@@ -36,7 +36,7 @@ function CreateArea(props: Props) {
 
 	return (
 		<div>
-			<form>
+			<form className="create-note">
 				<input
 					onChange={updatePost}
 					name="title"
