@@ -1,6 +1,12 @@
 import React from 'react';
 
-function Note(props) {
+interface Props {
+	key: number;
+	title: string;
+	content: string;
+}
+
+function Note(props: Props) {
 	return (
 		<div className="note">
 			<h1>{props.title}</h1>
