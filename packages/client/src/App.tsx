@@ -12,15 +12,17 @@ interface Note {
 	content: string;
 }
 
+interface Post {
+	title: string;
+	content: string;
+}
 function App() {
 	const [notes, setNotes] = useState<Note[]>([]);
-	const [post, setPost] = useState({
-		title: '',
-		content: '',
-	});
 
-	function newPost(title: string, content: string) {
-		console.log(title, content);
+	function newPost(post: Post) {
+		setNotes((prevValue: any) => {
+			return [...prevValue, post];
+		});
 	}
 
 	return (
