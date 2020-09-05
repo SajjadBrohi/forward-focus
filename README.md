@@ -1,6 +1,6 @@
 # RESTful API
 
-A RESTful server API made in express.js
+A react application that interact with a RESTful server API made in express.js
 
 ## Uses:
 
