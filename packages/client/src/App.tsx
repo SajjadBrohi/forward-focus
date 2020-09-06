@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Note from './components/Note';
-import CreateArea from './components/CreateArea';
+import Header from './components/questions-and-answers/Header';
+import Footer from './components/questions-and-answers/Footer';
+import Note from './components/questions-and-answers/Note';
+import CreateArea from './components/questions-and-answers/CreateArea';
 // import notes from './Notes';
 
 interface Note {
