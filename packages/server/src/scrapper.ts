@@ -1,64 +1,67 @@
-// Taken from the following link as a starter
-// https://www.lewuathe.com/simple-crawling-with-puppeteer-in-typescript.html
+const puppeteer = require('puppeteer');
 
-import {URL} from 'url';
-import {mkdirSync, existsSync} from 'fs';
-import * as puppeteer from 'puppeteer';
+async function libraryScrapper() {
+	const link = 'https://www.library.uq.edu.au/';
 
-export class Crawer {
-  private baseUrl: string;
+	const browser = await puppeteer.launch({
+		headless: true,
+		slowMo: 100,
+		devtools: true,
+	});
 
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
-  }
+	try {
+		const page = await browser.newPage();
+		const librarySpaceAvailability = {};
 
-  crawl(site: any) {
-    (async () => {
-      // Wait for browser launching.
-     const browser = await puppeteer.launch();
-     // Wait for creating the new page.
-     const page = await browser.newPage();
+		await page.setViewport({ width: 1199, height: 900 });
 
-     await this.crawlInternal(page, `${this.baseUrl}/index.html`, site["children"], site["name"]);
+		await page.goto(link);
 
-     browser.close();
-    })();
-  }
+		await page.waitForSelector('#computersList .paper-item-0');
 
-  /**
-   * Crawling the site recursively
-   * selectors is a list of selectors of child pages.
-   */
-  async crawlInternal(page: any, path: string, selectors: [string], dirname: string) {
-    // Create a directory storing the result PDFs.
-    if (!existsSync(dirname)) {
-      mkdirSync(dirname);
-    }
+		// Extract the space availability information from the site
+		const librarySpace = await page.evaluate(() => {
+			const rowNodeList = document.querySelectorAll(
+				'#computersList .paper-item-0 .computers-available',
+			);
+			const rowArray = Array.from(rowNodeList);
+			let links = rowArray.map(<HTMLElement>(element) => {
+				const librarySpaceText = element.innerText.split(' free of ');
+				return Math.floor((librarySpaceText[0] / librarySpaceText[1]) * 100);
+			});
+			return links;
+		});
 
-    // Go to the target page.
-    let url = new URL(path);
-    await page.goto(path, {waitUntil: 'networkidle'});
-    // Take a snapshot in PDF format.
-    await page.pdf({path:
-      `${dirname}/${url.pathname.slice(1).replace("/", "-")}.pdf`, format: 'A4'});
-    if (selectors.length == 0) {
-      return;
-    }
+		// Extract the library name information from the site
+		const libraryName = await page.evaluate(() => {
+			const rowNodeList = document.querySelectorAll(
+				'#computersList .paper-item-0 .linked-item',
+			);
+			const rowArray = Array.from(rowNodeList);
+			let links = rowArray.map(<HTMLElement>(element) => {
+				return element.innerText;
+			});
+			return links;
+		});
 
-       // Traversing in an order of BFS.
-    let items: [string] = await page.evaluate((sel) => {
-      let ret = [];
-       for (let item of document.querySelectorAll(sel)) {
-        let href = item.getAttribute("href");
-        ret.push(href);
-       }
-       return ret;
-    }, selectors[0]["selector"]);
+		libraryName.forEach((library, index) => {
+			librarySpaceAvailability[library] = librarySpace[index];
+		});
 
-    for (let item of items) {
-      console.log(`Capturing ${item}`);
-      await this.crawlInternal(page,
-        `${item}`, selectors[0]["children"], `${dirname}/${selectors[0]["name"]}`)
-    }
-  }
+		await page.close();
+		await browser.close();
+
+		return librarySpaceAvailability;
+	} catch (error) {
+		console.log(error);
+		await browser.close();
+	}
 }
+
+async function main() {
+	const xx = await libraryScrapper();
+
+	console.log(xx);
+}
+
+main();

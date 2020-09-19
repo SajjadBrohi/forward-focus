@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-(async () => {
+async function libraryScrapper() {
 	const link = 'https://www.library.uq.edu.au/';
 
 	const browser = await puppeteer.launch({
@@ -11,6 +11,7 @@ const puppeteer = require('puppeteer');
 
 	try {
 		const page = await browser.newPage();
+		const librarySpaceAvailability = {};
 
 		await page.setViewport({ width: 1199, height: 900 });
 
@@ -42,20 +43,25 @@ const puppeteer = require('puppeteer');
 			});
 			return links;
 		});
-		console.log(librarySpace);
-		console.log(libraryName);
-
-		const librarySpaceAvailability = {};
 
 		libraryName.forEach((library, index) => {
 			librarySpaceAvailability[library] = librarySpace[index];
 		});
 
-		console.log(librarySpaceAvailability);
 		await page.close();
 		await browser.close();
+
+		return librarySpaceAvailability;
 	} catch (error) {
 		console.log(error);
 		await browser.close();
 	}
-})();
+}
+
+async function main() {
+	const xx = await libraryScrapper();
+
+	console.log(xx);
+}
+
+main();
