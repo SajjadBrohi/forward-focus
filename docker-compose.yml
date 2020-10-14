@@ -37,6 +37,8 @@ services:
       - '3000:3000'
     container_name: client
     restart: always
+    environment:
+      - REACT_URI=client
     stdin_open: true
     volumes:
       - ./packages/client:/packages/client
