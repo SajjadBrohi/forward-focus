@@ -18,7 +18,7 @@ function CreateArea(props: Props) {
 
 	function updatePost(event: any) {
 		const { name, value } = event.target;
-		setPost((prevVal) => {
+		setPost((prevVal: any) => {
 			return {
 				...prevVal,
 				[name]: value,
@@ -43,13 +43,13 @@ function CreateArea(props: Props) {
 				<input
 					onChange={updatePost}
 					name="title"
-					placeholder="Question Summary"
+					placeholder="Note Title"
 					value={post.title}
 				/>
 				<textarea
 					onChange={updatePost}
 					name="content"
-					placeholder="Details"
+					placeholder="Content"
 					rows={3}
 					value={post.content}
 				/>
