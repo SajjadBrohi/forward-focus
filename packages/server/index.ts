@@ -8,6 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const mongoURI = process.env.MONGO_URI || "mongodb://localhost/wikiDB";
 const port = process.env.PORT || 4000;
+console.log(mongoURI);
 
 mongoose.connect(mongoURI, {
 	useNewUrlParser: true,

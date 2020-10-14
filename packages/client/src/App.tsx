@@ -17,10 +17,11 @@ interface Post {
 	content: string;
 }
 
-
 async function fetchNotes() {
-	const reactURI = process.env.REACT_URI || "localhost";
-	const response = await fetch(`http://${reactURI}:4000/articles`);
+	const reactURI = process.env.REACT_URI || "http://localhost:4000";
+	console.log(process.env.REACT_URI);
+	console.log(reactURI);
+	const response = await fetch(`${reactURI}/articles`);
 
 	const libraryCapacity = await response.json();
 	return libraryCapacity;

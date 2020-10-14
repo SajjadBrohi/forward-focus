@@ -31,14 +31,16 @@ services:
       - app-network
 
   client:
+    depends_on:
+      - server
     build:
       context: ./packages/client
+      args:
+        - REACT_URI=http://server:4000
     ports:
       - '3000:3000'
     container_name: client
     restart: always
-    environment:
-      - REACT_URI=client
     stdin_open: true
     volumes:
       - ./packages/client:/packages/client
