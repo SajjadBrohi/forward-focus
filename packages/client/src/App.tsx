@@ -18,10 +18,10 @@ interface Post {
 }
 
 async function fetchNotes() {
-	const reactURI = process.env.REACT_URI || "http://localhost:4000";
-	console.log(process.env.REACT_URI);
-	console.log(reactURI);
-	const response = await fetch(`${reactURI}/articles`);
+	let reactURI = window.location.href.split(':');
+	let updatedReactURI = reactURI.slice(0, reactURI.length - 1).join(":");
+	console.log(updatedReactURI);
+	const response = await fetch(`${updatedReactURI}:4000/articles`);
 
 	const libraryCapacity = await response.json();
 	return libraryCapacity;

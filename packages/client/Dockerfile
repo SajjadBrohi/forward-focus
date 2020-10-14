@@ -3,9 +3,6 @@ FROM node
 RUN mkdir -p /packages/client
 WORKDIR /packages/client
 
-ARG REACT_URI
-ENV REACT_URI=$REACT_URI 
-
 COPY package*.json ./
 
 RUN npm install
