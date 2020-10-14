@@ -20,7 +20,7 @@ services:
     container_name: server
     restart: always
     environment:
-      - MONGO_URI=mongodb://db:27017/wikiDB
+      - MONGO_URI=mongodb://db:27017/forwardFocusDb
       - PORT=4000
     ports:
       - '4000:4000'

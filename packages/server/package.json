@@ -1,7 +1,7 @@
 {
-	"name": "restful-api",
+	"name": "server",
 	"version": "1.0.0",
-	"description": "",
+	"description": "RESTful API for access and modification to the MongoDB server. Also inclues the server.",
 	"scripts": {
 		"build": "tsc ./index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"

@@ -22,7 +22,7 @@ let startTimeInterval = false;
 async function fetchNotes() {
 	let reactURI = window.location.href.split(':');
 	let updatedReactURI = reactURI.slice(0, reactURI.length - 1).join(":");
-	const response = await fetch(`${updatedReactURI}:4000/articles`);
+	const response = await fetch(`${updatedReactURI}:4000/notes`);
 
 	const libraryCapacity = await response.json();
 	return libraryCapacity;
@@ -36,18 +36,18 @@ function App() {
 			fetchNotes().then((fetchedNotes) => {
 				setNotes(fetchedNotes);
 			});
-		}, 100)
+		}, 10)
 		startTimeInterval = true;
 	}
 
 	function deletePost(id: number) {
-		notes.forEach((note, index) => index === id ? fetchCall(note.title, '', 'DELETE') : '');
+		notes.forEach((note: any, index: any) => index === id ? fetchCall(note.title, '', 'DELETE') : '');
 	}
 
 	return (
 		<div>
 			<Header /> <CreateArea deleteFunction={deletePost} /> <Footer />
-			{notes.map((note, index) => (
+			{notes.map((note: any, index: any) => (
 				<Note
 					id={index}
 					title={note.title}
