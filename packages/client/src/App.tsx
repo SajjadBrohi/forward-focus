@@ -46,7 +46,8 @@ function App() {
 
 	return (
 		<div>
-			<Header /> <CreateArea deleteFunction={deletePost} /> <Footer />
+			{/* <Header />  */}
+			<CreateArea deleteFunction={deletePost} /> <Footer />
 			{notes.map((note: any, index: any) => (
 				<Note
 					id={index}
