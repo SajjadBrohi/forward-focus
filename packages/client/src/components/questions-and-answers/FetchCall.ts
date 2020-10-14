@@ -6,7 +6,7 @@ async function apiPostNote(title: string, content: string, httpMethod: string) {
 
 	if (httpMethod === 'DELETE') {
 		let response = await fetch(
-			`http://${updatedReactURI}:4000/articles/${title}`,
+			`${updatedReactURI}:4000/articles/${title}`,
 			{
 				method: httpMethod,
 			},
@@ -14,7 +14,7 @@ async function apiPostNote(title: string, content: string, httpMethod: string) {
 		return response.status;
 	} else {
 		let response = await fetch(
-			`http://${updatedReactURI}:4000/articles?title=${title}&content=${content}`,
+			`${updatedReactURI}:4000/articles?title=${title}&content=${content}`,
 			{
 				method: httpMethod,
 			},
