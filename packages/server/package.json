@@ -13,8 +13,7 @@
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"mongodb": "^3.6.0",
-		"mongoose": "^5.10.0",
-		"typescript": "^3.9.7"
+		"mongoose": "^5.10.0"
 	},
 	"devDependencies": {
 		"@types/express": "^4.17.7",

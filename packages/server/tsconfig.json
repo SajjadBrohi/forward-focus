@@ -1,9 +1,0 @@
-{
-	"compilerOptions": {
-		"target": "esNext",
-		"watch": false,
-		"outDir": "dist",
-		"types": ["node", "express"],
-		"lib": ["DOM", "es2017"]
-	}
-}

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
-import Header from './components/questions-and-answers/Header';
-import Footer from './components/questions-and-answers/Footer';
-import Note from './components/questions-and-answers/Note';
-import CreateArea from './components/questions-and-answers/CreateArea';
-import fetchCall from './components/questions-and-answers/FetchCall';
+import Header from './components/notes/Header';
+import Footer from './components/notes/Footer';
+import Note from './components/notes/Note';
+import CreateArea from './components/notes/CreateArea';
+import fetchCall from './components/FetchCall';
 
 interface Note {
 	key: number;
@@ -17,10 +17,11 @@ interface Post {
 	content: string;
 }
 
+let startTimeInterval = false;
+
 async function fetchNotes() {
 	let reactURI = window.location.href.split(':');
 	let updatedReactURI = reactURI.slice(0, reactURI.length - 1).join(":");
-	console.log(updatedReactURI);
 	const response = await fetch(`${updatedReactURI}:4000/articles`);
 
 	const libraryCapacity = await response.json();
@@ -30,27 +31,22 @@ async function fetchNotes() {
 function App() {
 	const [notes, setNotes] = useState<Note[]>([]);
 
-	fetchNotes().then((fetchedNotes) => {
-		setNotes(fetchedNotes);
-	});
-	
-	function newPost(post: Post) {
-		setNotes((prevValue: any) => {
-			return [...prevValue, post];
-		});
+	if (!startTimeInterval) {
+		setInterval(()=> {
+			fetchNotes().then((fetchedNotes) => {
+				setNotes(fetchedNotes);
+			});
+		}, 100)
+		startTimeInterval = true;
 	}
 
 	function deletePost(id: number) {
 		notes.forEach((note, index) => index === id ? fetchCall(note.title, '', 'DELETE') : '');
-
-		setNotes((prevValue: any) => {
-			return prevValue.filter((post: any, index: number) => index !== id);
-		});
 	}
 
 	return (
 		<div>
-			<Header /> <CreateArea postFunction={newPost} /> <Footer />
+			<Header /> <CreateArea deleteFunction={deletePost} /> <Footer />
 			{notes.map((note, index) => (
 				<Note
 					id={index}
