@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import fetchCall from './FetchCall';
 
 interface Props {
 	postFunction: (post: Post) => void;
@@ -26,7 +27,10 @@ function CreateArea(props: Props) {
 	}
 
 	function submitForm(event: any) {
-		props.postFunction(post);
+		if (post.title !== '') {
+			props.postFunction(post);
+			fetchCall(post.title, post.content, 'POST');	
+		}
 		setPost({
 			title: '',
 			content: '',

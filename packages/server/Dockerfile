@@ -1,6 +1,7 @@
 FROM node
 
-WORKDIR /usr/src/app
+RUN mkdir -p /packages/server
+WORKDIR /packages/server
 
 COPY package*.json ./
 
@@ -8,8 +9,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+EXPOSE 4000
 
-EXPOSE 3000
-
-CMD [ "npm" , "start"]
+CMD [ "node" , "index.js"]

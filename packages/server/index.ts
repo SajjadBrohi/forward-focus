@@ -1,10 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const cors = require('cors')
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost/wikiDB', {
+const mongoURI = process.env.MONGO_URI || "mongodb://localhost/wikiDB";
+const port = process.env.PORT || 4000;
+
+mongoose.connect(mongoURI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
@@ -32,8 +37,8 @@ app
 
 	.post((req, res): void => {
 		const article = new Article({
-			title: req.body.title,
-			content: req.body.content,
+			title: req.query.title,
+			content: req.query.content,
 		});
 
 		article.save((err): void => {
@@ -72,7 +77,7 @@ app
 	.put((req, res): void => {
 		Article.findOneAndUpdate(
 			{ title: req.params.articleTitle },
-			{ title: req.body.title, content: req.body.content },
+			{ title: req.query.title, content: req.query.content },
 			(err, response) => {
 				if (err) {
 					res.send(err);
@@ -86,7 +91,7 @@ app
 	.patch((req, res): void => {
 		Article.findOneAndUpdate(
 			{ title: req.params.articleTitle },
-			{ $set: req.body },
+			{ $set: req.query },
 			(err, response) => {
 				if (err) {
 					res.send(err);
@@ -110,6 +115,6 @@ app
 		);
 	});
 
-app.listen(3000, (): void => {
-	console.log('Server started at port 3000.');
+app.listen(port, (): void => {
+	console.log(`Server started at port ${port}.`);
 });

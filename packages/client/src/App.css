@@ -59,9 +59,10 @@ footer p {
 	position: relative;
 	float: right;
 	margin-right: 10px;
-	color: rgb(146, 41, 138);
+	background-color: rgb(146, 41, 138);
+	color: white;
 	border: none;
-	width: 36px;
+	width: 90px;
 	height: 36px;
 	cursor: pointer;
 	outline: none;
@@ -86,16 +87,17 @@ form.create-note textarea {
 	font-family: inherit;
 	resize: none;
 }
+
 form.create-note button {
 	position: absolute;
-	right: 18px;
-	bottom: -18px;
+	right: 20px;
+	bottom: -20px;
 	background: rgb(146, 41, 138);
 	color: #fff;
 	border: none;
 	border-radius: 50%;
-	width: 36px;
-	height: 36px;
+	width: 50px;
+	height: 50px;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 	cursor: pointer;
 	outline: none;
