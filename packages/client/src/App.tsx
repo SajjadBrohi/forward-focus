@@ -17,9 +17,9 @@ interface Post {
 	content: string;
 }
 
-const reactURI = process.env.REACT_URI || "localhost";
 
 async function fetchNotes() {
+	const reactURI = process.env.REACT_URI || "localhost";
 	const response = await fetch(`http://${reactURI}:4000/articles`);
 
 	const libraryCapacity = await response.json();
