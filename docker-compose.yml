@@ -41,6 +41,8 @@ services:
     volumes:
       - ./packages/client:/packages/client
       - ./packages/client/node_modules:/packages/client/node_modules
+    networks:
+      - app-network
 networks:
   app-network:
     driver: bridge
