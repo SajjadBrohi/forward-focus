@@ -24,9 +24,6 @@ services:
       - PORT=4000
     ports:
       - '4000:4000'
-    volumes:
-      - ./packages/server:/packages/server
-      - ./packages/server/node_modules:/packages/server/node_modules
     networks:
       - app-network
 
@@ -40,9 +37,6 @@ services:
     container_name: client
     restart: always
     stdin_open: true
-    volumes:
-      - ./packages/client:/packages/client
-      - ./packages/client/node_modules:/packages/client/node_modules
     networks:
       - app-network
 
