@@ -14,12 +14,20 @@ mongoose.connect(mongoURI, {
 	useUnifiedTopology: true,
 });
 
+// Schema for the Note Collection
 const noteSchema = new mongoose.Schema({
 	title: String,
 	content: String,
 });
 
 const Note = mongoose.model('Note', noteSchema);
+
+// Schema for the planner collection
+const plannerSchema = new mongoose.Schema({
+	jsonObject: String,
+});
+
+const Planner = mongoose.model('Planner', plannerSchema);
 
 /*
 		Requests Targetting all Notes	
@@ -108,6 +116,46 @@ app
 
 	.delete((req, res) => {
 		Note.findOneAndDelete({ title: req.params.noteTitle }, (err, response) => {
+			if (err) {
+				res.send(err);
+			} else {
+				res.send('Successfully deleted!');
+			}
+		});
+	});
+
+/*
+		Requests Targetting Planner Collection
+*/
+
+app
+	.route('/planner')
+	.get((req, res) => {
+		Planner.find({}, (err, foundPlanner) => {
+			if (err) {
+				res.send(err);
+			} else {
+				res.send(foundPlanner);
+			}
+		});
+	})
+
+	.post((req, res) => {
+		const planner = new Planner({
+			jsonObject: req.query.object,
+		});
+
+		planner.save((err) => {
+			if (err) {
+				res.send(err);
+			} else {
+				res.send('Successfully added a new planner object!');
+			}
+		});
+	})
+
+	.delete((req, res) => {
+		Planner.deleteMany({}, (err) => {
 			if (err) {
 				res.send(err);
 			} else {

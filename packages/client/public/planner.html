@@ -19,5 +19,131 @@
 			<a href="timer.html"><h2>Timer</h2></a>
 			<a href="planner.html"><h2 class="current-page">Planner</h2></a>
 		</header>
+		<a href="#" class="stats-button">📊 Stats</a>
+		<main>
+			<table class="planner">
+				<tr class="days">
+					<th></th>
+					<th data-day="1">
+						Mon
+						<h1>1</h1>
+					</th>
+					<th data-day="2">
+						Tue
+						<h1>1</h1>
+					</th>
+					<th data-day="3">
+						Wed
+						<h1>1</h1>
+					</th>
+					<th data-day="4">
+						Thur
+						<h1>1</h1>
+					</th>
+					<th data-day="5">
+						Fri
+						<h1>1</h1>
+					</th>
+					<th data-day="6">
+						Sat
+						<h1>1</h1>
+					</th>
+					<th data-day="0">
+						Sun
+						<h1>1</h1>
+					</th>
+				</tr>
+				<tr class="plans">
+					<th>7am - 11am</th>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+				</tr>
+				<tr class="plans">
+					<th>11am - 3pm</th>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+				</tr>
+				<tr class="plans">
+					<th>3pm - 7pm</th>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+				</tr>
+				<tr class="plans">
+					<th>7pm - 11pm</th>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+					<td>+</td>
+				</tr>
+			</table>
+
+			<section class="statistics hide">
+				<p class="close-button">x</p>
+
+				<div>
+					<p>
+						Study
+					</p>
+				</div>
+				<div>
+					<p>
+						Coding
+					</p>
+				</div>
+				<div>
+					<p>
+						Job
+					</p>
+				</div>
+				<div>
+					<p>
+						Volunteer
+					</p>
+				</div>
+				<div>
+					<p>
+						Relaxing
+					</p>
+				</div>
+			</section>
+		</main>
+		<form id="activity-details" class="hide">
+			<p class="close-button">x</p>
+			<div class="inputs">
+				<label for="activityType">Activity type:</label>
+				<select name="activityType">
+					<option value="study">Study</option>
+					<option value="coding">Coding</option>
+					<option value="job">Job</option>
+					<option value="volunteer">Volunteering</option>
+					<option value="relax">Relaxing</option>
+				</select>
+			</div>
+			<br />
+			<div class="inputs">
+				<label for="activity">Activity name:</label>
+				<textarea name="activity" cols="35" rows="4"></textarea>
+			</div>
+			<br />
+			<button>Submit</button>
+		</form>
 	</body>
 </html>

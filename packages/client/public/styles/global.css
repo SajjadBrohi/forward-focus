@@ -10,10 +10,11 @@ html {
 
 body {
 	background: #eee;
-	padding: 0 16px;
+	overflow: hidden;
 }
 
 header {
+	padding: 0 16px;
 	background-color: rgb(146, 41, 138);
 	margin: auto -16px;
 	padding: 16px 32px;

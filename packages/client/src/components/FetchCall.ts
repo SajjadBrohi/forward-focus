@@ -1,4 +1,3 @@
-
 async function apiPostNote(title: string, content: string, httpMethod: string) {
 	let reactURI = window.location.href.split(':');
 	let updatedReactURI = reactURI.slice(0, reactURI.length - 1).join(":");
