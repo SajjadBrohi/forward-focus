@@ -36,7 +36,7 @@ function App() {
 			fetchNotes().then((fetchedNotes) => {
 				setNotes(fetchedNotes);
 			});
-		}, 10)
+		}, 50)
 		startTimeInterval = true;
 	}
 
